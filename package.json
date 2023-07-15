@@ -1,5 +1,5 @@
 {
-  "name": "plugin-sample",
+  "name": "typography-go",
   "version": "0.1.10",
   "description": "This is a sample plugin for Siyuan (https://b3log.org/siyuan)",
   "main": ".src/index.js",
