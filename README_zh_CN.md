@@ -26,9 +26,19 @@
 当时我觉得这也不是((20240330175610-c0n2im0 '小议「说理」'))不可以是吧？
 ```
 
+## 详细规则
+
+- 中文使用全角符号
+- ……
+- 待补充
+
 ## 参考排版规范（包括但不限于）
 
 - [yikeke/zh-style-guide: An open-source style guide for writing Chinese technical documents: https://zh-style-guide.readthedocs.io](https://github.com/yikeke/zh-style-guide/)
 - [ruanyf/document-style-guide: 中文技术文档的写作规范](https://github.com/ruanyf/document-style-guide)
 - [mzlogin/chinese-copywriting-guidelines: Chinese Copywriting Guidelines：中文文案排版指北（简体中文版）](https://github.com/mzlogin/chinese-copywriting-guidelines)
 - 《GBT 15834-2011 标点符号用法》
+
+## 说明
+
+主要规则取自 https://github.com/Natumsol/obsidian-pangu 「统一文本内标点的使用」。插件有任何可取之处皆归功于它。

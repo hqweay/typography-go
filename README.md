@@ -38,3 +38,7 @@
 - [ruanyf/document-style-guide: 中文技术文档的写作规范](https://github.com/ruanyf/document-style-guide)
 - [mzlogin/chinese-copywriting-guidelines: Chinese Copywriting Guidelines：中文文案排版指北（简体中文版）](https://github.com/mzlogin/chinese-copywriting-guidelines)
 - 《GBT 15834-2011 标点符号用法》
+
+## 说明
+
+主要规则取自 https://github.com/Natumsol/obsidian-pangu 「统一文本内标点的使用」。插件有任何可取之处皆归功于它。
