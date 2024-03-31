@@ -7,11 +7,11 @@
   "backends": ["windows", "linux", "darwin"],
   "frontends": ["desktop"],
   "displayName": {
-    "default": "Plugin Sample",
-    "zh_CN": "排版优化"
+    "default": "中文排版优化",
+    "zh_CN": "中文排版优化"
   },
   "description": {
-    "default": "This is a plugin sample",
+    "default": "中文排版优化",
     "zh_CN": "中文排版优化"
   },
   "readme": {
@@ -23,7 +23,7 @@
     "patreon": "",
     "github": "",
     "custom": [
-      "https://ld246.com/sponsor"
+      "https://leay.net"
     ]
   }
 }

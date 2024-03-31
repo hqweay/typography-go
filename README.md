@@ -1,151 +1,40 @@
-[中文](https://github.com/siyuan-note/plugin-sample/blob/main/README_zh_CN.md)
+格式化规则有个人偏好，使用前建议做好备份，简单效果如下：
 
-# SiYuan plugin sample
+```
+这是一篇"测试"文章.
+"Are u OK"
+但是正是因为没有这样一个例外的存在，我们不能把女性视作一个集体，只能一个一个（une par une）看待，例外的缺席使得她们无法构成一个封闭的集合.....这些内容属于拉康在 20 世纪 70 年代通过一种逻辑的方式对女性问题的贡献，“并非全部”以及「全部但有一个例外」属于他的性化公式提出的内容。。。。我们这里暂时把他的这一理论提出但不做进一步的说明，之后再回到这个问题上。
+这样的话"也不是不行".
 
-## Get started
+> 难道说！！！
 
-* Make a copy of this repo as a template with the <kbd>Use this template</kbd> button, please note that the repo name
-  must be the same as the plugin name, the default branch must be `main`
-* Clone your repo to a local development folder. For convenience, you can place this folder in
-  your `{workspace}/data/plugins/` folder
-* Install [NodeJS](https://nodejs.org/en/download) and [pnpm](https://pnpm.io/installation), then run `pnpm i` in the
-  command line under your repo folder
-* Execute `pnpm run dev` for real-time compilation
-* Open SiYuan marketplace and enable plugin in downloaded tab
+当时 https://leay.net/cn.jslˆ&fjsfh
 
-## Development
-
-* i18n/*
-* icon.png (160*160)
-* index.css
-* index.js
-* plugin.json
-* preview.png (1024*768)
-* README*.md
-* [Fontend API](https://github.com/siyuan-note/petal)
-* [Backend API](https://github.com/siyuan-note/siyuan/blob/master/API.md)
-
-## I18n
-
-In terms of internationalization, our main consideration is to support multiple languages. Specifically, we need to
-complete the following tasks:
-
-* Meta information about the plugin itself, such as plugin description and readme
-    * `description` and `readme` fields in plugin.json, and the corresponding README*.md file
-* Text used in the plugin, such as button text and tooltips
-    * src/i18n/*.json language configuration files
-    * Use `this.i18.key` to get the text in the code
-* Finally, declare the language supported by the plugin in the `i18n` field in plugin.json
-
-It is recommended that the plugin supports at least English and Simplified Chinese, so that more people can use it more
-conveniently.
-
-## plugin.json
-
-```json
-{
-  "name": "plugin-sample",
-  "author": "Vanessa",
-  "url": "https://github.com/siyuan-note/plugin-sample",
-  "version": "0.1.3",
-  "minAppVersion": "2.8.8",
-  "backends": ["windows", "linux", "darwin"],
-  "frontends": ["desktop"],
-  "displayName": {
-    "default": "Plugin Sample",
-    "zh_CN": "插件示例"
-  },
-  "description": {
-    "default": "This is a plugin sample",
-    "zh_CN": "这是一个插件示例"
-  },
-  "readme": {
-    "default": "README.md",
-    "zh_CN": "README_zh_CN.md"
-  },
-  "funding": {
-    "openCollective": "",
-    "patreon": "",
-    "github": "",
-    "custom": [
-      "https://ld246.com/sponsor"
-    ]
-  }
-}
+当时我觉得这也不是((20240330175610-c0n2im0 '小议「说理」'))不可以是吧？
 ```
 
-* `name`: Plugin name, must be the same as the repo name, and must be unique globally (no duplicate plugin names in the
-  marketplace)
-* `author`: Plugin author name
-* `url`: Plugin repo URL
-* `version`: Plugin version number, it is recommended to follow the [semver](https://semver.org/) specification
-* `minAppVersion`: Minimum version number of SiYuan required to use this plugin
-* `backends`: Backend environment required by the plugin, optional values are `windows`, `linux`, `darwin`, `docker`, `android`, `ios` and `all`
-  * `windows`: Windows desktop
-  * `linux`: Linux desktop
-  * `darwin`: macOS desktop
-  * `docker`: Docker
-  * `android`: Android APP
-  * `ios`: iOS APP
-  * `all`: All environments
-* `frontends`: Frontend environment required by the plugin, optional values are `desktop`, `desktop-window`, `mobile`, `browser-desktop`, `browser-mobile` and `all`
-  * `desktop`: Desktop
-  * `desktop-window`: Desktop window converted from tab
-  * `mobile`: Mobile APP
-  * `browser-desktop`: Desktop browser
-  * `browser-mobile`: Mobile browser
-  * `all`: All environments
-* `displayName`: Template display name, mainly used for display in the marketplace list, supports multiple languages
-    * `default`: Default language, must exist
-    * `zh_CN`, `en_US` and other languages: optional, it is recommended to provide at least Chinese and English
-* `description`: Plugin description, mainly used for display in the marketplace list, supports multiple languages
-    * `default`: Default language, must exist
-    * `zh_CN`, `en_US` and other languages: optional, it is recommended to provide at least Chinese and English
-* `readme`: readme file name, mainly used to display in the marketplace details page, supports multiple languages
-    * `default`: Default language, must exist
-    * `zh_CN`, `en_US` and other languages: optional, it is recommended to provide at least Chinese and English
-* `funding`: Plugin sponsorship information
-    * `openCollective`: Open Collective name
-    * `patreon`: Patreon name
-    * `github`: GitHub login name
-    * `custom`: Custom sponsorship link list
+```
+这是一篇「测试」文章。
+“Are u OK”
+但是正是因为没有这样一个例外的存在，我们不能把女性视作一个集体，只能一个一个 (une par une) 看待，例外的缺席使得她们无法构成一个封闭的集合……这些内容属于拉康在 20 世纪 70 年代通过一种逻辑的方式对女性问题的贡献，「并非全部」以及「全部但有一个例外」属于他的性化公式提出的内容……我们这里暂时把他的这一理论提出但不做进一步的说明，之后再回到这个问题上。
+这样的话「也不是不行」.
 
-## Package
+> 难道说！
 
-No matter which method is used to compile and package, we finally need to generate a package.zip, which contains at
-least the following files:
+当时 https://leay.net/cn.jslˆ&fjsfh
 
-* i18n/*
-* icon.png (160*160)
-* index.css
-* index.js
-* plugin.json
-* preview.png (1024*768)
-* README*.md
-
-## List on the marketplace
-
-* `pnpm run build` to generate package.zip
-* Create a new GitHub release using your new version number as the "Tag version". See here for an
-  example: https://github.com/siyuan-note/plugin-sample/releases
-* Upload the file package.zip as binary attachments
-* Publish the release
-
-If it is the first release, please create a pull request to
-the [Community Bazaar](https://github.com/siyuan-note/bazaar) repository and modify the plugins.json file in it. This
-file is the index of all community plugin repositories, the format is:
-
-```json
-{
-  "repos": [
-    "username/reponame"
-  ]
-}
+当时我觉得这也不是((20240330175610-c0n2im0 '小议「说理」'))不可以是吧？
 ```
 
-After the PR is merged, the bazaar will automatically update the index and deploy through GitHub Actions. When releasing
-a new version of the plugin in the future, you only need to follow the above steps to create a new release, and you
-don't need to PR the community bazaar repo.
+## 详细规则
 
-Under normal circumstances, the community bazaar repo will automatically update the index and deploy every hour,
-and you can check the deployment status at https://github.com/siyuan-note/bazaar/actions.
+- 中文使用全角符号
+- ……
+- 待补充
+
+## 参考排版规范（包括但不限于）
+
+- [yikeke/zh-style-guide: An open-source style guide for writing Chinese technical documents: https://zh-style-guide.readthedocs.io](https://github.com/yikeke/zh-style-guide/)
+- [ruanyf/document-style-guide: 中文技术文档的写作规范](https://github.com/ruanyf/document-style-guide)
+- [mzlogin/chinese-copywriting-guidelines: Chinese Copywriting Guidelines：中文文案排版指北（简体中文版）](https://github.com/mzlogin/chinese-copywriting-guidelines)
+- 《GBT 15834-2011 标点符号用法》
