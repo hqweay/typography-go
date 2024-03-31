@@ -189,65 +189,35 @@ class FormatUtil {
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\?/g, "$1？");
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\\/g, "$1、");
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])＼s*\:/g, "$1：");
+
+    //先把分号换成引号
+    content = content.replace(/\s*"(.*?)"\s*/g, " “$1” ");
+
     // 簡體中文使用直角引號
     content = content.replace(/‘/g, "『");
     content = content.replace(/’/g, "』");
     content = content.replace(/“/g, "「");
     content = content.replace(/”/g, "」");
 
-    // ![]() -> ![pic]()
-    // content = content.replace("![](", "![pic](");
+    content = content.replace(
+      /（([!@#$%^&*()_+-=\[\]{};':"./<>【】「」《》]*\w.*?[!@#$%^&*()_+-=\[\]{};':"./<>]*)）/g,
+      " ($1) "
+    );
 
-    // 括号使用半角标点——为啥呀
-    // 半角括号的两边都有空格就不在这里处理了，放到行中处理
-    //content = content.replace(/\s*[（(]\s*/g, ' ( ');
-    //content = content.replace(/\s*[）)]\s*/g, ' ) ');
-
-    //start 2022-08  add
-    // content = content.replace(/\s*[（(]\s*/g, "（"); // - () 这种会被替换为 -（）
-    // content = content.replace(/\s*[）)]\s*/g, "）");
-
-    //  content = content.replace(/[（(]/g, "（");
-    //  content = content.replace(/[）)]/g, "）");
-
-    //英文
-    // content = content.replace(/（\s*(\w)/g, " ($1");
-    // content = content.replace(/(\w)\s*）/g, "$1) ");
-    //（i don't know.）;（i don't know）;我的天哪（"but i don't give a fuck"）兄弟;
-    // content = content.replace(/（\s*([!@#$%^&*()_+-=\[\]{};':"./<>]*\w*[!@#$%^&*()_+-=\[\]{};':"./<>]*)\s*）/g, " ($1) ");
-    // content = content.replace(
-    //   /（([!@#$%^&*()_+-=\[\]{};':"./<>【】「」《》]*\w.*?[!@#$%^&*()_+-=\[\]{};':"./<>]*)）/g,
-    //   " ($1) "
-    // );
-
-    // `fun   (double)    {}` haha `but`
-    // `fun   ()    {}` haha `but`
-    // `fun()` haha `but`
-    // content = content.replace(/(\w)\s\(/g, "$1(");
-    // content = content.replace(/\)\s(\w)/g, ")$1"); // fix function () -> function()
-    // content = content.replace(
-    //   /`([!\w].*?)\s*\((.*?)\)\s*(.*?)`/g,
-    //   "`$1($2)$3`"
-    // ); // fix function () -> function() `!isDown()`
-    // content = content.replace(
-    //   /`([!\w].*?)\s*\（(.*?)\）\s*(.*?)`/g,
-    //   "`$1($2)$3`"
-    // ); // fix function () -> function()
-
-    // content = content.replace(/^(-（)/g, "- （"); // fix - () 这种会被替换为 -（）
-
-    //  content = content.replace(/\s+（/g, " （");
-    //  content = content.replace(/）\s+/g, "） ");
-
-    //end 2022-08  add
+    // (my 我的)
+    // (我的 milk)
+    content = content.replace(
+      / \((.*?[\u4e00-\u9fa5\u3040-\u30FF])\) /g,
+      "（$1）"
+    );
+    content = content.replace(
+      / \(([\u4e00-\u9fa5\u3040-\u30FF].*?)\) /g,
+      "（$1）"
+    );
     // 英文和数字内部的全角标点 `，。；‘’“”：？！＠＃％＆－＝＋｛｝【】｜＼～`改成半角标点
     content = content.replace(/(\w)\s*，\s*(\w)/g, "$1, $2");
     content = content.replace(/(\w)\s*。\s*(\w)/g, "$1. $2");
     content = content.replace(/(\w)\s*；\s*(\w)/g, "$1; $2");
-    content = content.replace(/(\w)\s*‘\s*(\w)/g, "$1 '$2");
-    content = content.replace(/(\w)\s*’\s*(\w)/g, "$1' $2");
-    content = content.replace(/(\w)\s*“\s*(\w)/g, '$1 "$2');
-    content = content.replace(/(\w)\s*”\s*(\w)/g, '$1" $2');
     content = content.replace(/(\w)\s*：\s*(\w)/g, "$1: $2");
     content = content.replace(/(\w)\s*？\s*(\w)/g, "$1? $2");
     content = content.replace(/(\w)\s*！\s*(\w)/g, "$1! $2");
@@ -268,13 +238,26 @@ class FormatUtil {
 
     content = content.replace(
       /(\w[:;,.!?\'\"]?[:;,.!?\'\"]?)\s*「\s*(\w)/g,
-      '$1 "$2'
+      "$1 “$2"
     );
-    content = content.replace(/(\w[,.!?]?)\s*」\s*([「]?\w?)/g, '$1" $2');
-    content = content.replace(/(\w)\s*『\s*(\w)/g, "$1 '$2");
-    content = content.replace(/(\w)\s*』\s*(\w)/g, "$1' $2");
-    //  content = content.replace(/(\w)'(\s)?(\w)/g, "$1'$3'");
+    content = content.replace(/(\w[,.!?]?)\s*」\s*([「]?\w?)/g, "$1” $2");
+    content = content.replace(/(\w)\s*『\s*(\w)/g, "$1‘f$2");
+    content = content.replace(/(\w)\s*』\s*(\w)/g, "$1’$2");
     content = content.replace(/(\b\w+')\s(\w*\b)/g, "$1$2");
+
+    content = content.replace(/「(.*?)"/g, "「$1」");
+    content = content.replace(/「(.*?)”/g, "「$1」");
+    content = content.replace(/“(\w.*?\w?)」/g, "“$1”");
+    content = content.replace(/'(\w.*?\w)”/g, "“$1”");
+    // 过滤一下 <div id = ""
+
+    content = content.replace(/(\w)'(\w)?/g, "$1’$2");
+
+    content = content.replace(/\s*「(\w.*?\w[,.!?]?)」\s*/g, " “$1” ");
+    content = content.replace(/“(\w)」/g, "“$1”");
+    content = content.replace(/「(\w)”/g, "“$1”");
+
+    content = content.replace(/”\s*([,.!?]\1?)/g, "”$1");
 
     // 连续三个以上的 `。` 改成 `......`
     content = content.replace(/[。]{3,}/g, "……");
@@ -283,6 +266,17 @@ class FormatUtil {
     content = content.replace(/([！？]+)\1{1,}/g, "$1");
     // 截断连续超过一个的 。，；：、“”『』〖〗《》 为一个
     content = content.replace(/([。，；：、“”『』〖〗《》【】])\1{1,}/g, "$1");
+    // content = content.replace(
+    //   /\{\s*:\s*id\s*=\s*“(.*?)”\s*updated\s*=\s*“(.*?)”\s*\}/g,
+    //   '{: id="$1" updated="$2"}'
+    // );
+    // content = content.replace(
+    //   /\{\s*:\s*updated\s*=\s*“(.*?)”\s*id\s*=\s*“(.*?)”\s*\}/g,
+    //   '{: id="$1" updated="$2"}'
+    // );
+    content = content.replace(/updated\s*=\s*“(.*?)”/g, 'updated="$1"}');
+    content = content.replace(/id\s*=\s*“(.*?)”/g, 'id="$1"}');
+
     return content;
   }
 
