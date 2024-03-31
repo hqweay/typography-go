@@ -279,7 +279,9 @@ class FormatUtil {
     content = content.replace(/(updated=".*")\s*\}/g, "$1}");
     content = content.replace(/(id=".*")\s*\}/g, "$1}");
 
-    let lines = content.split('\n');
+    content = content.replace(/\*\*(.*?)\s*\*\*/g, "**$1**");
+
+    let lines = content.split("\n");
     for (let index = 0; index < lines.length; index++) {
       lines[index] = lines[index].trim();
     }
