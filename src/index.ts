@@ -283,32 +283,77 @@ export default class PluginSample extends Plugin {
         // console.log(box);
         // console.log(box);
 
-        // let childrenResult = await await fetchSyncPost(
-        //   "/api/block/getChildBlocks",
-        //   {
-        //     id: parentId,
-        //   }
-        // );
-        // let childrenBlocks = childrenResult.data;
 
-        // console.log(childrenBlocks);
+        confirm(
+          "⚠️操作前强烈建议先对数据进行备份，若转换效果不理想可从历史页面恢复。",
+          "确认格式化吗？",
+          async () => {
+            let childrenResult = await fetchSyncPost(
+              "/api/block/getChildBlocks",
+              {
+                id: parentId,
+              }
+            );
+            let childrenBlocks = childrenResult.data;
 
-        let response = await fetchSyncPost("/api/block/getBlockKramdown", {
-          id: parentId,
-        });
-        let result = response.data;
-        console.log(result.kramdown.trim());
-        let formatResult = formatUtil.formatContent(result.kramdown.trim());
+            // 默认都单独更新内容块
+            if (childrenBlocks.length > 0) {
+              for (let i = 0; i < childrenBlocks.length; i++) {
+                console.log(i);
+                showMessage(`正在格式化第${i+1}个内容块，请勿进行其它操作。`);
+                let id = childrenBlocks[i].id;
+                let type = childrenBlocks[i].type;
+                if (type != "p" || type != "b" || type != "l" || type != "h") {
+                  continue;
+                }
+                let response = await fetchSyncPost(
+                  "/api/block/getBlockKramdown",
+                  {
+                    id: id,
+                  }
+                );
+                let result = response.data;
+                let formatResult = formatUtil.formatContent(result.kramdown);
+                let updateResult = await fetchSyncPost(
+                  "/api/block/updateBlock",
+                  {
+                    dataType: "markdown",
+                    data: formatResult.trim(),
+                    id: id,
+                  }
+                );
+              }
+            } else {
+              let response = await fetchSyncPost(
+                "/api/block/getBlockKramdown",
+                {
+                  id: parentId,
+                }
+              );
+              let result = response.data;
+              let formatResult = formatUtil.formatContent(result.kramdown);
+              let updateResult = await fetchSyncPost("/api/block/updateBlock", {
+                dataType: "markdown",
+                data: formatResult.trim(),
+                id: parentId,
+              });
+            }
+            showMessage(`格式化完成！`);
+          },
+          () => {
+            return;
+          }
+        );
+
+ 
+
+        // console.log(result.kramdown.trim());
+        // let formatResult = formatUtil.formatContent(result.kramdown);
         // console.log(result);
-        let updateResult = await fetchSyncPost("/api/block/updateBlock", {
-          dataType: "markdown",
-          //   data: formatResult.trim(),
-          data: formatResult.trim(),
-          id: parentId,
-        });
-        console.log(formatResult.trim());
-        console.log("------")
-        console.log(updateResult);
+
+        // console.log(formatResult.trim());
+        // console.log("------")
+        // console.log(updateResult);
       },
     });
     if (!this.isMobile) {

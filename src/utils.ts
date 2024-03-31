@@ -196,7 +196,7 @@ class FormatUtil {
     content = content.replace(/”/g, "」");
 
     // ![]() -> ![pic]()
-    content = content.replace("![](", "![pic](");
+    // content = content.replace("![](", "![pic](");
 
     // 括号使用半角标点——为啥呀
     // 半角括号的两边都有空格就不在这里处理了，放到行中处理
@@ -204,8 +204,8 @@ class FormatUtil {
     //content = content.replace(/\s*[）)]\s*/g, ' ) ');
 
     //start 2022-08  add
-    content = content.replace(/\s*[（(]\s*/g, "（"); // - () 这种会被替换为 -（）
-    content = content.replace(/\s*[）)]\s*/g, "）");
+    // content = content.replace(/\s*[（(]\s*/g, "（"); // - () 这种会被替换为 -（）
+    // content = content.replace(/\s*[）)]\s*/g, "）");
 
     //  content = content.replace(/[（(]/g, "（");
     //  content = content.replace(/[）)]/g, "）");
@@ -215,26 +215,26 @@ class FormatUtil {
     // content = content.replace(/(\w)\s*）/g, "$1) ");
     //（i don't know.）;（i don't know）;我的天哪（"but i don't give a fuck"）兄弟;
     // content = content.replace(/（\s*([!@#$%^&*()_+-=\[\]{};':"./<>]*\w*[!@#$%^&*()_+-=\[\]{};':"./<>]*)\s*）/g, " ($1) ");
-    content = content.replace(
-      /（([!@#$%^&*()_+-=\[\]{};':"./<>【】「」《》]*\w.*?[!@#$%^&*()_+-=\[\]{};':"./<>]*)）/g,
-      " ($1) "
-    );
+    // content = content.replace(
+    //   /（([!@#$%^&*()_+-=\[\]{};':"./<>【】「」《》]*\w.*?[!@#$%^&*()_+-=\[\]{};':"./<>]*)）/g,
+    //   " ($1) "
+    // );
 
     // `fun   (double)    {}` haha `but`
     // `fun   ()    {}` haha `but`
     // `fun()` haha `but`
     // content = content.replace(/(\w)\s\(/g, "$1(");
     // content = content.replace(/\)\s(\w)/g, ")$1"); // fix function () -> function()
-    content = content.replace(
-      /`([!\w].*?)\s*\((.*?)\)\s*(.*?)`/g,
-      "`$1($2)$3`"
-    ); // fix function () -> function() `!isDown()`
-    content = content.replace(
-      /`([!\w].*?)\s*\（(.*?)\）\s*(.*?)`/g,
-      "`$1($2)$3`"
-    ); // fix function () -> function()
+    // content = content.replace(
+    //   /`([!\w].*?)\s*\((.*?)\)\s*(.*?)`/g,
+    //   "`$1($2)$3`"
+    // ); // fix function () -> function() `!isDown()`
+    // content = content.replace(
+    //   /`([!\w].*?)\s*\（(.*?)\）\s*(.*?)`/g,
+    //   "`$1($2)$3`"
+    // ); // fix function () -> function()
 
-    content = content.replace(/^(-（)/g, "- （"); // fix - () 这种会被替换为 -（）
+    // content = content.replace(/^(-（)/g, "- （"); // fix - () 这种会被替换为 -（）
 
     //  content = content.replace(/\s+（/g, " （");
     //  content = content.replace(/）\s+/g, "） ");
@@ -323,13 +323,13 @@ class FormatUtil {
         line = this.replacePunctuations(line);
         // 将无编号列表的“* ”改成 “- ”
         // 将无编号列表的“- ”改成 “- ”
-        line = line.replace(/^(\s*)[-\*]\s+(\S)/, "$1- $2");
+        // line = line.replace(/^(\s*)[-\*]\s+(\S)/, "$1- $2");
         // 删除多余的空格
-        line = this.deleteSpaces(line);
+        // line = this.deleteSpaces(line);
         // 插入必要的空格
-        line = this.insertSpace(line);
+        // line = this.insertSpace(line);
         // 将有编号列表的“1.  ”改成 “1. ”
-        line = line.replace(/^(\s*)(\d\.)\s+(\S)/, "$1$2 $3");
+        // line = line.replace(/^(\s*)(\d\.)\s+(\S)/, "$1$2 $3");
 
         return line;
       })
