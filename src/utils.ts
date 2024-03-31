@@ -274,6 +274,7 @@ class FormatUtil {
     //   /\{\s*:\s*updated\s*=\s*“(.*?)”\s*id\s*=\s*“(.*?)”\s*\}/g,
     //   '{: id="$1" updated="$2"}'
     // );
+    //todo
     content = content.replace(/updated\s*=\s*“(.*?)”/g, 'updated="$1"');
     content = content.replace(/id\s*=\s*“(.*?)”/g, 'id="$1"');
     content = content.replace(/(updated=".*")\s*\}/g, "$1}");
@@ -281,11 +282,12 @@ class FormatUtil {
 
     content = content.replace(/\*\*(.*?)\s*\*\*/g, "**$1**");
 
-    let lines = content.split("\n");
-    for (let index = 0; index < lines.length; index++) {
-      lines[index] = lines[index].trim();
-    }
-    return lines.join("\n");
+    return content.trim();
+    // let lines = content.split("\n");
+    // for (let index = 0; index < lines.length; index++) {
+    //   lines[index] = lines[index].trim();
+    // }
+    // return lines.join("\n");
   }
 
   replaceFullNumbersAndChars(content: any) {
@@ -306,7 +308,8 @@ class FormatUtil {
     // 每行操作
     const lines = content.split("\n");
     const ignoreBlocks: IgnoreBlock[] = this.getIgnoreBlocks(lines);
-    const pattern = /\{:\supdated=".*\sid=".*\}/;
+    // const pattern = /\{:\supdated=".*\sid=".*\}/;
+    const pattern = /\{:.*\}/;
 
     content = lines
       .map((line: any, index: any) => {

@@ -76,6 +76,16 @@ export default class PluginSample extends Plugin {
                 }
               );
               let result = response.data;
+
+              if (/^\{:.*\}$/.test(result.kramdown)) {
+                const deleteEmptyClock = true;
+                if (deleteEmptyClock) {
+                  await fetchSyncPost("/api/block/deleteBlock", {
+                    id: id,
+                  });
+                }
+                continue;
+              }
               let formatResult = formatUtil.formatContent(result.kramdown);
               let updateResult = await fetchSyncPost("/api/block/updateBlock", {
                 dataType: "markdown",
