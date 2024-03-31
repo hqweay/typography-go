@@ -191,7 +191,7 @@ class FormatUtil {
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])＼s*\:/g, "$1：");
 
     //先把分号换成引号
-    content = content.replace(/\s*"(.*?)"\s*/g, " “$1” ");
+    content = content.replace(/"(.*?)"/g, "“$1”");
 
     // 簡體中文使用直角引號
     content = content.replace(/‘/g, "『");
@@ -274,10 +274,16 @@ class FormatUtil {
     //   /\{\s*:\s*updated\s*=\s*“(.*?)”\s*id\s*=\s*“(.*?)”\s*\}/g,
     //   '{: id="$1" updated="$2"}'
     // );
-    content = content.replace(/updated\s*=\s*“(.*?)”/g, 'updated="$1"}');
-    content = content.replace(/id\s*=\s*“(.*?)”/g, 'id="$1"}');
+    content = content.replace(/updated\s*=\s*“(.*?)”/g, 'updated="$1"');
+    content = content.replace(/id\s*=\s*“(.*?)”/g, 'id="$1"');
+    content = content.replace(/(updated=".*")\s*\}/g, "$1}");
+    content = content.replace(/(id=".*")\s*\}/g, "$1}");
 
-    return content;
+    let lines = content.split('\n');
+    for (let index = 0; index < lines.length; index++) {
+      lines[index] = lines[index].trim();
+    }
+    return lines.join("\n");
   }
 
   replaceFullNumbersAndChars(content: any) {

@@ -17,14 +17,11 @@ import {
 import "./index.scss";
 import { formatUtil } from "./utils";
 
-const STORAGE_NAME = "menu-config";
-const TAB_TYPE = "custom_tab";
-const DOCK_TYPE = "dock_tab";
+const STORAGE_NAME = "typography-go-config";
 
 export default class PluginSample extends Plugin {
   private customTab: () => IModel;
   private isMobile: boolean;
-  private blockIconEventBindThis = this.blockIconEvent.bind(this);
 
   onload() {
     this.data[STORAGE_NAME] = { readonlyText: "Readonly" };
@@ -33,256 +30,19 @@ export default class PluginSample extends Plugin {
     this.isMobile = frontEnd === "mobile" || frontEnd === "browser-mobile";
     // 图标的制作参见帮助文档
     this.addIcons(`<symbol id="iconFace" viewBox="0 0 32 32">
-<path d="M13.667 17.333c0 0.92-0.747 1.667-1.667 1.667s-1.667-0.747-1.667-1.667 0.747-1.667 1.667-1.667 1.667 0.747 1.667 1.667zM20 15.667c-0.92 0-1.667 0.747-1.667 1.667s0.747 1.667 1.667 1.667 1.667-0.747 1.667-1.667-0.747-1.667-1.667-1.667zM29.333 16c0 7.36-5.973 13.333-13.333 13.333s-13.333-5.973-13.333-13.333 5.973-13.333 13.333-13.333 13.333 5.973 13.333 13.333zM14.213 5.493c1.867 3.093 5.253 5.173 9.12 5.173 0.613 0 1.213-0.067 1.787-0.16-1.867-3.093-5.253-5.173-9.12-5.173-0.613 0-1.213 0.067-1.787 0.16zM5.893 12.627c2.28-1.293 4.040-3.4 4.88-5.92-2.28 1.293-4.040 3.4-4.88 5.92zM26.667 16c0-1.040-0.16-2.040-0.44-2.987-0.933 0.2-1.893 0.32-2.893 0.32-4.173 0-7.893-1.92-10.347-4.92-1.4 3.413-4.187 6.093-7.653 7.4 0.013 0.053 0 0.12 0 0.187 0 5.88 4.787 10.667 10.667 10.667s10.667-4.787 10.667-10.667z"></path>
-</symbol>
-<symbol id="iconSaving" viewBox="0 0 32 32">
-<path d="M20 13.333c0-0.733 0.6-1.333 1.333-1.333s1.333 0.6 1.333 1.333c0 0.733-0.6 1.333-1.333 1.333s-1.333-0.6-1.333-1.333zM10.667 12h6.667v-2.667h-6.667v2.667zM29.333 10v9.293l-3.76 1.253-2.24 7.453h-7.333v-2.667h-2.667v2.667h-7.333c0 0-3.333-11.28-3.333-15.333s3.28-7.333 7.333-7.333h6.667c1.213-1.613 3.147-2.667 5.333-2.667 1.107 0 2 0.893 2 2 0 0.28-0.053 0.533-0.16 0.773-0.187 0.453-0.347 0.973-0.427 1.533l3.027 3.027h2.893zM26.667 12.667h-1.333l-4.667-4.667c0-0.867 0.12-1.72 0.347-2.547-1.293 0.333-2.347 1.293-2.787 2.547h-8.227c-2.573 0-4.667 2.093-4.667 4.667 0 2.507 1.627 8.867 2.68 12.667h2.653v-2.667h8v2.667h2.68l2.067-6.867 3.253-1.093v-4.707z"></path>
-</symbol>`);
+<svg t="1711874745467" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1408" width="32" height="32"><path d="M28.668 367.46H114.8v36H28.668z" fill="#4A4A4A" p-id="1409"></path><path d="M904.944 637.676c0 72.088-58.976 131.068-131.064 131.068H245.864c-72.088 0-131.068-58.976-131.068-131.068V186.984c0-72.088 58.98-131.068 131.068-131.068h528.02c72.084 0 131.064 58.98 131.064 131.068v450.692z" fill="#B9B9BF" p-id="1410"></path><path d="M773.884 786.744H245.864c-82.196 0-149.068-66.868-149.068-149.068V186.984c0-82.196 66.872-149.068 149.068-149.068h528.02c82.196 0 149.072 66.872 149.072 149.068v450.692c-0.012 82.2-66.876 149.068-149.072 149.068zM245.864 73.916c-62.344 0-113.068 50.724-113.068 113.068v450.692c0 62.344 50.724 113.068 113.068 113.068h528.02c62.344 0 113.072-50.724 113.072-113.068V186.984c0-62.344-50.728-113.068-113.072-113.068H245.864z" fill="#4A4A4A" p-id="1411"></path><path d="M337.612 292.892m-121.704 0a121.704 121.704 0 1 0 243.408 0 121.704 121.704 0 1 0-243.408 0Z" fill="#94E5FF" p-id="1412"></path><path d="M337.612 432.596c-77.032 0-139.704-62.672-139.704-139.708 0-77.032 62.672-139.704 139.704-139.704 77.036 0 139.708 62.672 139.708 139.704 0 77.036-62.672 139.708-139.708 139.708z m0-243.412c-57.184 0-103.704 46.52-103.704 103.704s46.52 103.708 103.704 103.708c57.184 0 103.708-46.524 103.708-103.708S394.796 189.184 337.612 189.184z" fill="#4A4A4A" p-id="1413"></path><path d="M683.548 292.892m-121.704 0a121.704 121.704 0 1 0 243.408 0 121.704 121.704 0 1 0-243.408 0Z" fill="#94E5FF" p-id="1414"></path><path d="M683.548 432.596c-77.036 0-139.708-62.672-139.708-139.708 0-77.032 62.672-139.704 139.708-139.704 77.032 0 139.704 62.672 139.704 139.704 0 77.036-62.672 139.708-139.704 139.708z m0-243.412c-57.188 0-103.708 46.52-103.708 103.704s46.52 103.708 103.708 103.708c57.18 0 103.704-46.524 103.704-103.708s-46.524-103.704-103.704-103.704zM901.204 367.46h86.128v36h-86.128z" fill="#4A4A4A" p-id="1415"></path><path d="M396.168 986.668v-217.924h220.94v217.924" fill="#8A8A8A" p-id="1416"></path><path d="M337.612 546.484h345.936v104.856H337.612z" fill="#8A8A8A" p-id="1417"></path><path d="M683.548 669.34H337.612a18 18 0 0 1-18-18v-104.856c0-9.936 8.06-18 18-18h345.936c9.936 0 18 8.064 18 18v104.856c0 9.94-8.064 18-18 18z m-327.936-36h309.936v-68.856H355.612v68.856z" fill="#4A4A4A" p-id="1418"></path><path d="M575.408 669.34a18.004 18.004 0 0 1-18-18v-104.856a18.004 18.004 0 0 1 36 0v104.856a18 18 0 0 1-18 18zM448.084 669.34a18 18 0 0 1-18-18v-104.856a18.004 18.004 0 0 1 36 0v104.856a18 18 0 0 1-18 18zM396.168 822.928h220.94v36H396.168zM396.168 895.512h220.94v36H396.168z" fill="#4A4A4A" p-id="1419"></path><path d="M338 298m-32 0a32 32 0 1 0 64 0 32 32 0 1 0-64 0Z" fill="#4A4A4A" p-id="1420"></path><path d="M683.548 298m-32 0a32 32 0 1 0 64 0 32 32 0 1 0-64 0Z" fill="#4A4A4A" p-id="1421"></path></svg></symbol>`);
 
     const topBarElement = this.addTopBar({
       icon: "iconFace",
       title: this.i18n.addTopBarIcon,
       position: "right",
-      callback: () => {
-        if (this.isMobile) {
-          this.addMenu();
-        } else {
-          let rect = topBarElement.getBoundingClientRect();
-          // 如果被隐藏，则使用更多按钮
-          if (rect.width === 0) {
-            rect = document.querySelector("#barMore").getBoundingClientRect();
-          }
-          if (rect.width === 0) {
-            rect = document
-              .querySelector("#barPlugins")
-              .getBoundingClientRect();
-          }
-          this.addMenu(rect);
-        }
-      },
-    });
-
-    const statusIconTemp = document.createElement("template");
-    statusIconTemp.innerHTML = `<div class="toolbar__item b3-tooltips b3-tooltips__w" aria-label="Remove plugin-sample Data">
-    <svg>
-        <use xlink:href="#iconTrashcan"></use>
-    </svg>
-</div>`;
-    statusIconTemp.content.firstElementChild.addEventListener("click", () => {
-      confirm(
-        "⚠️",
-        this.i18n.confirmRemove.replace("${name}", this.name),
-        () => {
-          this.removeData(STORAGE_NAME).then(() => {
-            this.data[STORAGE_NAME] = { readonlyText: "Readonly" };
-            showMessage(`[${this.name}]: ${this.i18n.removedData}`);
-          });
-        }
-      );
-    });
-
-    this.addStatusBar({
-      element: statusIconTemp.content.firstElementChild as HTMLElement,
-    });
-
-    this.customTab = this.addTab({
-      type: TAB_TYPE,
-      init() {
-        this.element.innerHTML = `<div class="plugin-sample__custom-tab">${this.data.text}</div>`;
-      },
-      beforeDestroy() {
-        console.log("before destroy tab:", TAB_TYPE);
-      },
-      destroy() {
-        console.log("destroy tab:", TAB_TYPE);
-      },
-    });
-
-    this.addCommand({
-      langKey: "showDialog",
-      hotkey: "⇧⌘M",
-      callback: () => {
-        this.showDialog();
-      },
-    });
-
-    this.addDock({
-      config: {
-        position: "LeftBottom",
-        size: { width: 200, height: 0 },
-        icon: "iconSaving",
-        title: "Custom Dock",
-      },
-      data: {
-        text: "This is my custom dock",
-      },
-      type: DOCK_TYPE,
-      init() {
-        this.element.innerHTML = `<div class="fn__flex-1 fn__flex-column">
-    <div class="block__icons">
-        <div class="block__logo">
-            <svg><use xlink:href="#iconEmoji"></use></svg>
-            Custom Dock
-        </div>
-        <span class="fn__flex-1 fn__space"></span>
-        <span data-type="min" class="block__icon b3-tooltips b3-tooltips__sw" aria-label="Min ${adaptHotkey(
-          "⌘W"
-        )}"><svg><use xlink:href="#iconMin"></use></svg></span>
-    </div>
-    <div class="fn__flex-1 plugin-sample__custom-dock">
-        ${this.data.text}
-    </div>
-</div>`;
-      },
-      destroy() {
-        console.log("destroy dock:", DOCK_TYPE);
-      },
-    });
-
-    const textareaElement = document.createElement("textarea");
-    this.setting = new Setting({
-      confirmCallback: () => {
-        this.saveData(STORAGE_NAME, { readonlyText: textareaElement.value });
-      },
-    });
-    this.setting.addItem({
-      title: "Readonly text",
-      createActionElement: () => {
-        textareaElement.className = "b3-text-field fn__block";
-        textareaElement.placeholder = "Readonly text in the menu";
-        textareaElement.value = this.data[STORAGE_NAME].readonlyText;
-        return textareaElement;
-      },
-    });
-    const btnaElement = document.createElement("button");
-    btnaElement.className =
-      "b3-button b3-button--outline fn__flex-center fn__size200";
-    btnaElement.textContent = "Open";
-    btnaElement.addEventListener("click", () => {
-      window.open("https://github.com/siyuan-note/plugin-sample");
-    });
-    this.setting.addItem({
-      title: "Open plugin url",
-      description: "Open plugin url in browser",
-      actionElement: btnaElement,
-    });
-
-    this.protyleSlash = [
-      {
-        filter: ["insert emoji 😊", "插入表情 😊", "crbqwx"],
-        html: `<div class="b3-list-item__first"><span class="b3-list-item__text">${this.i18n.insertEmoji}</span><span class="b3-list-item__meta">😊</span></div>`,
-        id: "insertEmoji",
-        callback(protyle: Protyle) {
-          protyle.insert("😊");
-        },
-      },
-    ];
-
-    console.log(this.i18n.helloPlugin);
-  }
-
-  onLayoutReady() {
-    this.loadData(STORAGE_NAME);
-    console.log(`frontend: ${getFrontend()}; backend: ${getBackend()}`);
-  }
-
-  onunload() {
-    console.log(this.i18n.byePlugin);
-  }
-
-  /* 自定义设置
-    openSetting() {
-        const dialog = new Dialog({
-            title: this.name,
-            content: `<div class="b3-dialog__content"><textarea class="b3-text-field fn__block" placeholder="readonly text in the menu"></textarea></div>
-<div class="b3-dialog__action">
-    <button class="b3-button b3-button--cancel">${this.i18n.cancel}</button><div class="fn__space"></div>
-    <button class="b3-button b3-button--text">${this.i18n.save}</button>
-</div>`,
-            width: this.isMobile ? "92vw" : "520px",
-        });
-        const inputElement = dialog.element.querySelector("textarea");
-        inputElement.value = this.data[STORAGE_NAME].readonlyText;
-        const btnsElement = dialog.element.querySelectorAll(".b3-button");
-        dialog.bindInput(inputElement, () => {
-            (btnsElement[1] as HTMLButtonElement).click();
-        });
-        inputElement.focus();
-        btnsElement[0].addEventListener("click", () => {
-            dialog.destroy();
-        });
-        btnsElement[1].addEventListener("click", () => {
-            this.saveData(STORAGE_NAME, {readonlyText: inputElement.value});
-            dialog.destroy();
-        });
-    }
-    */
-
-  private eventBusLog({ detail }: any) {
-    console.log(detail);
-  }
-
-  private blockIconEvent({ detail }: any) {
-    const ids: string[] = [];
-    detail.blockElements.forEach((item: HTMLElement) => {
-      ids.push(item.getAttribute("data-node-id"));
-    });
-    detail.menu.addItem({
-      iconHTML: "",
-      type: "readonly",
-      label: "IDs<br>" + ids.join("<br>"),
-    });
-  }
-
-  private showDialog() {
-    const dialog = new Dialog({
-      title: "Info",
-      content: `<div class="b3-dialog__content">
-    <div>API demo:</div>
-    <div class="fn__hr"></div>
-    <div class="plugin-sample__time">System current time: <span id="time"></span></div>
-    <div class="fn__hr"></div>
-    <div class="fn__hr"></div>
-    <div>Protyle demo:</div>
-    <div class="fn__hr"></div>
-    <div id="protyle" style="height: 360px;"></div>
-</div>`,
-      width: this.isMobile ? "92vw" : "560px",
-      height: "540px",
-    });
-    new Protyle(this.app, dialog.element.querySelector("#protyle"), {
-      blockId: "20200812220555-lj3enxa",
-    });
-    fetchPost("/api/system/currentTime", {}, (response) => {
-      dialog.element.querySelector("#time").innerHTML = new Date(
-        response.data
-      ).toString();
-    });
-  }
-
-  private addMenu(rect?: DOMRect) {
-    const menu = new Menu("topBarSample", () => {
-      console.log(this.i18n.byeMenu);
-    });
-    menu.addItem({
-      icon: "iconInfo",
-      label: "Dialog(open help first)",
-      accelerator: this.commands[0].customHotkey,
-      click: async () => {
+      callback: async () => {
         //寻找当前编辑的文档的id
         let parentId = formatUtil.getDocid();
-        console.log(parentId);
         if (parentId == null) {
           showMessage("error");
           return;
         }
-
-        //获取文档数据
-        // let [box, path] = await formatUtil.getParentDoc(parentId);
-
-        // console.log(box);
-        // console.log(box);
-
 
         confirm(
           "⚠️操作前强烈建议先对数据进行备份，若转换效果不理想可从历史页面恢复。",
@@ -296,38 +56,23 @@ export default class PluginSample extends Plugin {
             );
             let childrenBlocks = childrenResult.data;
 
-            // 默认都单独更新内容块
-            if (childrenBlocks.length > 0) {
-              for (let i = 0; i < childrenBlocks.length; i++) {
-                console.log(i);
-                showMessage(`正在格式化第${i+1}个内容块，请勿进行其它操作。`);
-                let id = childrenBlocks[i].id;
-                let type = childrenBlocks[i].type;
-                if (type != "p" || type != "b" || type != "l" || type != "h") {
-                  continue;
-                }
-                let response = await fetchSyncPost(
-                  "/api/block/getBlockKramdown",
-                  {
-                    id: id,
-                  }
-                );
-                let result = response.data;
-                let formatResult = formatUtil.formatContent(result.kramdown);
-                let updateResult = await fetchSyncPost(
-                  "/api/block/updateBlock",
-                  {
-                    dataType: "markdown",
-                    data: formatResult.trim(),
-                    id: id,
-                  }
+            for (let i = 0; i < childrenBlocks.length; i++) {
+              if (i === 0 || i % 50 === 0) {
+                showMessage(
+                  `正在格式化第${i + 1}至第${
+                    i + 50
+                  }个内容块，请勿进行其它操作。`
                 );
               }
-            } else {
+              let type = childrenBlocks[i].type;
+              let id = childrenBlocks[i].id;
+              if (type != "p" && type != "b" && type != "l" && type != "h") {
+                continue;
+              }
               let response = await fetchSyncPost(
                 "/api/block/getBlockKramdown",
                 {
-                  id: parentId,
+                  id: id,
                 }
               );
               let result = response.data;
@@ -335,356 +80,26 @@ export default class PluginSample extends Plugin {
               let updateResult = await fetchSyncPost("/api/block/updateBlock", {
                 dataType: "markdown",
                 data: formatResult.trim(),
-                id: parentId,
+                id: id,
               });
             }
+
             showMessage(`格式化完成！`);
           },
           () => {
             return;
           }
         );
-
- 
-
-        // console.log(result.kramdown.trim());
-        // let formatResult = formatUtil.formatContent(result.kramdown);
-        // console.log(result);
-
-        // console.log(formatResult.trim());
-        // console.log("------")
-        // console.log(updateResult);
       },
     });
-    if (!this.isMobile) {
-      menu.addItem({
-        icon: "iconLayoutBottom",
-        label: "Open Custom Tab",
-        click: () => {
-          const tab = openTab({
-            app: this.app,
-            custom: {
-              icon: "iconFace",
-              title: "Custom Tab",
-              data: {
-                text: "This is my custom tab",
-              },
-              fn: this.customTab,
-            },
-          });
-          console.log(tab);
-        },
-      });
-      menu.addItem({
-        icon: "iconLayoutBottom",
-        label: "Open Asset Tab(open help first)",
-        click: () => {
-          const tab = openTab({
-            app: this.app,
-            asset: {
-              path: "assets/paragraph-20210512165953-ag1nib4.svg",
-            },
-          });
-          console.log(tab);
-        },
-      });
-      menu.addItem({
-        icon: "iconLayoutBottom",
-        label: "Open Doc Tab(open help first)",
-        click: async () => {
-          const tab = await openTab({
-            app: this.app,
-            doc: {
-              id: "20200812220555-lj3enxa",
-            },
-          });
-          console.log(tab);
-        },
-      });
-      menu.addItem({
-        icon: "iconLayoutBottom",
-        label: "Open Search Tab",
-        click: () => {
-          const tab = openTab({
-            app: this.app,
-            search: {
-              k: "SiYuan",
-            },
-          });
-          console.log(tab);
-        },
-      });
-      menu.addItem({
-        icon: "iconLayoutBottom",
-        label: "Open Card Tab",
-        click: () => {
-          const tab = openTab({
-            app: this.app,
-            card: {
-              type: "all",
-            },
-          });
-          console.log(tab);
-        },
-      });
-      menu.addItem({
-        icon: "iconLayout",
-        label: "Open Float Layer(open help first)",
-        click: () => {
-          this.addFloatLayer({
-            ids: ["20210428212840-8rqwn5o", "20201225220955-l154bn4"],
-            defIds: ["20230415111858-vgohvf3", "20200813131152-0wk5akh"],
-            x: window.innerWidth - 768 - 120,
-            y: 32,
-          });
-        },
-      });
-    }
-    menu.addItem({
-      icon: "iconScrollHoriz",
-      label: "Event Bus",
-      type: "submenu",
-      submenu: [
-        {
-          icon: "iconSelect",
-          label: "On ws-main",
-          click: () => {
-            this.eventBus.on("ws-main", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off ws-main",
-          click: () => {
-            this.eventBus.off("ws-main", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On click-blockicon",
-          click: () => {
-            this.eventBus.on("click-blockicon", this.blockIconEventBindThis);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off click-blockicon",
-          click: () => {
-            this.eventBus.off("click-blockicon", this.blockIconEventBindThis);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On click-pdf",
-          click: () => {
-            this.eventBus.on("click-pdf", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off click-pdf",
-          click: () => {
-            this.eventBus.off("click-pdf", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On click-editorcontent",
-          click: () => {
-            this.eventBus.on("click-editorcontent", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off click-editorcontent",
-          click: () => {
-            this.eventBus.off("click-editorcontent", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On click-editortitleicon",
-          click: () => {
-            this.eventBus.on("click-editortitleicon", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off click-editortitleicon",
-          click: () => {
-            this.eventBus.off("click-editortitleicon", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On open-noneditableblock",
-          click: () => {
-            this.eventBus.on("open-noneditableblock", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off open-noneditableblock",
-          click: () => {
-            this.eventBus.off("open-noneditableblock", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On loaded-protyle",
-          click: () => {
-            this.eventBus.on("loaded-protyle", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off loaded-protyle",
-          click: () => {
-            this.eventBus.off("loaded-protyle", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On open-menu-blockref",
-          click: () => {
-            this.eventBus.on("open-menu-blockref", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off open-menu-blockref",
-          click: () => {
-            this.eventBus.off("open-menu-blockref", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On open-menu-fileannotationref",
-          click: () => {
-            this.eventBus.on("open-menu-fileannotationref", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off open-menu-fileannotationref",
-          click: () => {
-            this.eventBus.off("open-menu-fileannotationref", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On open-menu-tag",
-          click: () => {
-            this.eventBus.on("open-menu-tag", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off open-menu-tag",
-          click: () => {
-            this.eventBus.off("open-menu-tag", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On open-menu-link",
-          click: () => {
-            this.eventBus.on("open-menu-link", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off open-menu-link",
-          click: () => {
-            this.eventBus.off("open-menu-link", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On open-menu-image",
-          click: () => {
-            this.eventBus.on("open-menu-image", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off open-menu-image",
-          click: () => {
-            this.eventBus.off("open-menu-image", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On open-menu-av",
-          click: () => {
-            this.eventBus.on("open-menu-av", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off open-menu-av",
-          click: () => {
-            this.eventBus.off("open-menu-av", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On open-menu-content",
-          click: () => {
-            this.eventBus.on("open-menu-content", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off open-menu-content",
-          click: () => {
-            this.eventBus.off("open-menu-content", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On open-menu-breadcrumbmore",
-          click: () => {
-            this.eventBus.on("open-menu-breadcrumbmore", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off open-menu-breadcrumbmore",
-          click: () => {
-            this.eventBus.off("open-menu-breadcrumbmore", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconSelect",
-          label: "On input-search",
-          click: () => {
-            this.eventBus.on("input-search", this.eventBusLog);
-          },
-        },
-        {
-          icon: "iconClose",
-          label: "Off input-search",
-          click: () => {
-            this.eventBus.off("input-search", this.eventBusLog);
-          },
-        },
-      ],
-    });
-    menu.addSeparator();
-    menu.addItem({
-      icon: "iconSparkles",
-      label: this.data[STORAGE_NAME].readonlyText || "Readonly",
-      type: "readonly",
-    });
-    if (this.isMobile) {
-      menu.fullscreen();
-    } else {
-      menu.open({
-        x: rect.right,
-        y: rect.bottom,
-        isLeft: true,
-      });
-    }
+  }
+
+  onLayoutReady() {
+    this.loadData(STORAGE_NAME);
+    console.log(`frontend: ${getFrontend()}; backend: ${getBackend()}`);
+  }
+
+  onunload() {
+    console.log(this.i18n.byePlugin);
   }
 }
