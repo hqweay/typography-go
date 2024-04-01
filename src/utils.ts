@@ -5,6 +5,8 @@ interface IgnoreBlock {
   end: number;
 }
 
+import { engList } from "./engList.ts";
+
 class FormatUtil {
   //获取当前文档id
   getDocid() {
@@ -285,8 +287,11 @@ class FormatUtil {
 
     content = content.replace(/\*\*(.*?)\s*\*\*/g, "**$1**");
 
-    content = content.replace(/\*\*(.*?)\s*\*\*/g, "**$1**");
+    // content = content.replace(/\*\*(.*?)\s*\*\*/g, "**$1**");
 
+    engList.forEach((ele: any) => {
+      content = content.replace(ele.key, ele.value);
+    });
     return content;
     // let lines = content.split("\n");
     // for (let index = 0; index < lines.length; index++) {
