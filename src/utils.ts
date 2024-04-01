@@ -190,8 +190,11 @@ class FormatUtil {
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\\/g, "$1、");
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])＼s*\:/g, "$1：");
 
-    //先把分号换成引号
-    content = content.replace(/"(.*?)"/g, "“$1”");
+    // 不包含引用块才换
+    if (!/`.*?`/.test(content)) {
+      //先把分号换成引号
+      content = content.replace(/"(.*?)"/g, "“$1”");
+    }
 
     // 簡體中文使用直角引號
     content = content.replace(/‘/g, "『");
@@ -279,6 +282,8 @@ class FormatUtil {
     // content = content.replace(/id\s*=\s*“(.*?)”/g, 'id="$1"');
     // content = content.replace(/(updated=".*")\s*\}/g, "$1}");
     // content = content.replace(/(id=".*")\s*\}/g, "$1}");
+
+    content = content.replace(/\*\*(.*?)\s*\*\*/g, "**$1**");
 
     content = content.replace(/\*\*(.*?)\s*\*\*/g, "**$1**");
 
