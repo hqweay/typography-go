@@ -275,10 +275,10 @@ class FormatUtil {
     //   '{: id="$1" updated="$2"}'
     // );
     //todo
-    content = content.replace(/updated\s*=\s*“(.*?)”/g, 'updated="$1"');
-    content = content.replace(/id\s*=\s*“(.*?)”/g, 'id="$1"');
-    content = content.replace(/(updated=".*")\s*\}/g, "$1}");
-    content = content.replace(/(id=".*")\s*\}/g, "$1}");
+    // content = content.replace(/updated\s*=\s*“(.*?)”/g, 'updated="$1"');
+    // content = content.replace(/id\s*=\s*“(.*?)”/g, 'id="$1"');
+    // content = content.replace(/(updated=".*")\s*\}/g, "$1}");
+    // content = content.replace(/(id=".*")\s*\}/g, "$1}");
 
     content = content.replace(/\*\*(.*?)\s*\*\*/g, "**$1**");
 
@@ -309,7 +309,23 @@ class FormatUtil {
     const lines = content.split("\n");
     const ignoreBlocks: IgnoreBlock[] = this.getIgnoreBlocks(lines);
     // const pattern = /\{:\supdated=".*\sid=".*\}/;
-    const pattern = /\{:.*\}/;
+    // const pattern = /\{:.*\}/;
+
+    //过滤：
+    /**
+     * {: fsd }
+- {: fsd }
+> {: fsd }
+  {: updated="20240331182021" id="20240331182021-ux1ltc4"}
+     */
+    const filterPattern = /^(\*\s*)?(-\s*)?(>\s*)?(\s*)?\{:.*\}$/;
+    const formatPattern = /(\{:.*\})/;
+    const jumpPatterns = [
+      /^(\*\s*)?(-\s*)?(>\s*)?(\s*)?\{:.*\}$/,
+      /\(\(.*\)\)/,
+      /\[\[.*\]\]/,
+      /\{\{.*\}\}/,
+    ];
 
     content = lines
       .map((line: any, index: any) => {
@@ -321,7 +337,35 @@ class FormatUtil {
         ) {
           return line;
         }
-        if (pattern.test(line)) {
+        for (let index = 0; index < jumpPatterns.length; index++) {
+          if (jumpPatterns[index].test(line)) {
+            return line;
+          }
+        }
+        // console.log("+++++++");
+        // console.log(line);
+        // console.log("+++++++");
+        const matches = formatPattern.exec(line);
+        if (matches) {
+          if (matches[1]) {
+            let splits = line.split(matches[1]);
+            if (splits.length == 2) {
+              // console.log("000000000");
+              // console.log(splits);
+              // console.log("000000000");
+
+              //略过((这是))、[[还会]]
+              for (let index = 0; index < jumpPatterns.length; index++) {
+                if (jumpPatterns[index].test(splits[1])) {
+                  return line;
+                }
+              }
+
+              return (
+                splits[0] + matches[1] + this.replacePunctuations(splits[1])
+              );
+            }
+          }
           return line;
         }
         //中文文档内的英文标点替换为中文标点
