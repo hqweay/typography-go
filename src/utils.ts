@@ -206,14 +206,14 @@ class FormatUtil {
 
     // (my 我的)
     // (我的 milk)
-    content = content.replace(
-      / \((.*?[\u4e00-\u9fa5\u3040-\u30FF])\) /g,
-      "（$1）"
-    );
-    content = content.replace(
-      / \(([\u4e00-\u9fa5\u3040-\u30FF].*?)\) /g,
-      "（$1）"
-    );
+    // content = content.replace(
+    //   / \((.*?[\u4e00-\u9fa5\u3040-\u30FF])\) /g,
+    //   "（$1）"
+    // );
+    // content = content.replace(
+    //   / \(([\u4e00-\u9fa5\u3040-\u30FF].*?)\) /g,
+    //   "（$1）"
+    // );
     // 英文和数字内部的全角标点 `，。；‘’“”：？！＠＃％＆－＝＋｛｝【】｜＼～`改成半角标点
     content = content.replace(/(\w)\s*，\s*(\w)/g, "$1, $2");
     content = content.replace(/(\w)\s*。\s*(\w)/g, "$1. $2");
@@ -282,7 +282,7 @@ class FormatUtil {
 
     content = content.replace(/\*\*(.*?)\s*\*\*/g, "**$1**");
 
-    return content.trim();
+    return content;
     // let lines = content.split("\n");
     // for (let index = 0; index < lines.length; index++) {
     //   lines[index] = lines[index].trim();
@@ -321,7 +321,7 @@ class FormatUtil {
     const filterPattern = /^(\*\s*)?(-\s*)?(>\s*)?(\s*)?\{:.*\}$/;
     const formatPattern = /(\{:.*\})/;
     const jumpPatterns = [
-      /^(\*\s*)?(-\s*)?(>\s*)?(\s*)?\{:.*\}$/,
+      /^(\s*)?(\*\s*)?(-\s*)?(>\s*)?(\s*)?\{:.*\}$/,
       /\(\(.*\)\)/,
       /\[\[.*\]\]/,
       /\{\{.*\}\}/,
@@ -350,9 +350,9 @@ class FormatUtil {
           if (matches[1]) {
             let splits = line.split(matches[1]);
             if (splits.length == 2) {
-              // console.log("000000000");
-              // console.log(splits);
-              // console.log("000000000");
+              console.log("000000000");
+              console.log(splits);
+              console.log("000000000");
 
               //略过((这是))、[[还会]]
               for (let index = 0; index < jumpPatterns.length; index++) {
@@ -380,6 +380,9 @@ class FormatUtil {
         // 将有编号列表的“1.  ”改成 “1. ”
         // line = line.replace(/^(\s*)(\d\.)\s+(\S)/, "$1$2 $3");
 
+        // console.log("更新后的");
+        // console.log(line);
+        // console.log("更新后的");
         return line;
       })
       .join("\n");
