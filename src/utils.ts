@@ -191,6 +191,10 @@ class FormatUtil {
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\?/g, "$1？");
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])\\/g, "$1、");
     content = content.replace(/([\u4e00-\u9fa5\u3040-\u30FF])＼s*\:/g, "$1：");
+    // content = content.replace(
+    //   /\(([\u4e00-\u9fa5\u3040-\u30FF]+.*?[\u4e00-\u9fa5\u3040-\u30FF]?)\)/g,
+    //   "（$1）"
+    // );
 
     // 不包含引用块才换
     if (!/`.*?`/.test(content)) {
@@ -204,6 +208,9 @@ class FormatUtil {
     content = content.replace(/“/g, "「");
     content = content.replace(/”/g, "」");
 
+    // content = content.replace(/“(.*?[\u4e00-\u9fa5\u3040-\u30FF])”/g, "「$1」");
+    // content = content.replace(/“([\u4e00-\u9fa5\u3040-\u30FF].*?)”/g, "「$1」");
+
     content = content.replace(
       /（([!@#$%^&*()_+-=\[\]{};':"./<>【】「」《》]*\w.*?[!@#$%^&*()_+-=\[\]{};':"./<>]*)）/g,
       " ($1) "
@@ -211,19 +218,21 @@ class FormatUtil {
 
     // (my 我的)
     // (我的 milk)
-    // content = content.replace(
-    //   / \((.*?[\u4e00-\u9fa5\u3040-\u30FF])\) /g,
-    //   "（$1）"
-    // );
-    // content = content.replace(
-    //   / \(([\u4e00-\u9fa5\u3040-\u30FF].*?)\) /g,
-    //   "（$1）"
-    // );
+    content = content.replace(
+      /\((.*?[\u4e00-\u9fa5\u3040-\u30FF])\)/g,
+      "（$1）"
+    );
+    content = content.replace(
+      /\(([\u4e00-\u9fa5\u3040-\u30FF].*?)\)/g,
+      "（$1）"
+    );
     // 英文和数字内部的全角标点 `，。；‘’“”：？！＠＃％＆－＝＋｛｝【】｜＼～`改成半角标点
     content = content.replace(/(\w)\s*，\s*(\w)/g, "$1, $2");
     content = content.replace(/(\w)\s*。\s*(\w)/g, "$1. $2");
+    content = content.replace(/(\w)\s*。\s*(”)/g, "$1. $2");
     content = content.replace(/(\w)\s*；\s*(\w)/g, "$1; $2");
-    content = content.replace(/(\w)\s*：\s*(\w)/g, "$1: $2");
+    // content = content.replace(/(\w)\s*：\s*(\w)/g, "$1: $2");
+    content = content.replace(/(\w)\s*：\s*/g, "$1: ");
     content = content.replace(/(\w)\s*？\s*(\w)/g, "$1? $2");
     content = content.replace(/(\w)\s*！\s*(\w)/g, "$1! $2");
     content = content.replace(/(\w)\s*＠\s*(\w)/g, "$1@$2");
@@ -252,6 +261,7 @@ class FormatUtil {
 
     content = content.replace(/「(.*?)"/g, "「$1」");
     content = content.replace(/「(.*?)”/g, "「$1」");
+    content = content.replace(/"(.*?)」/g, "「$1」");
     content = content.replace(/“(\w.*?\w?)」/g, "“$1”");
     content = content.replace(/'(\w.*?\w)”/g, "“$1”");
     // 过滤一下 <div id = ""

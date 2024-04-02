@@ -4,7 +4,7 @@
 
 - 中文使用全角符号
 - 英文使用半角符号
-- 清除空行
+- 清除文档块
 - 标准命名或自定义转换（如 mysql ➡️ MySQL，详细列表见 `standardName/config.txt`）
 - ……
 - ==中英文插入空格请使用官方的「优化排版」==
@@ -13,10 +13,14 @@
 
 ```
 * In the words of Richelle E.Goodrich:「Easter is joy, hope, love, and renewal. Easter is proof that we can begin again。」
+* E.Goodrich：「Easter is joy, hope, love, and renewal. Easter is proof that we can begin again。」
 * 今天是星期一,我和我的朋友小明约好了一起去爬"勇者山"。“勇者山”是我的家乡最高的山.
 * 最高的山(之一)。。。
 
+你有freestyle吗?我有「freestyle".
+
 （one of）the highest mountains
+
 
 
 
@@ -25,8 +29,11 @@
 
 ```
 * In the words of Richelle E.Goodrich: “Easter is joy, hope, love, and renewal. Easter is proof that we can begin again。”
+* E.Goodrich: “Easter is joy, hope, love, and renewal. Easter is proof that we can begin again。”
 * 今天是星期一，我和我的朋友小明约好了一起去爬「勇者山」。「勇者山」是我的家乡最高的山。
-* 最高的山(之一)……
+* 最高的山（之一）……
+
+你有freestyle吗？我有 “freestyle”.
 
 (one of) the highest mountains
 
