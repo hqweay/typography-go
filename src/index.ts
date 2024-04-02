@@ -86,10 +86,14 @@ export default class PluginSample extends Plugin {
                 }
                 continue;
               }
+              //主要是备注更新有 bug
+              if (/\^[（(].*[）)]\^/.test(result.kramdown)) {
+                continue;
+              }
               let formatResult = formatUtil.formatContent(result.kramdown);
               let updateResult = await fetchSyncPost("/api/block/updateBlock", {
                 dataType: "markdown",
-                data: formatResult.trim(),
+                data: formatResult,
                 id: id,
               });
             }
