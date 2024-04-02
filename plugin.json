@@ -2,7 +2,7 @@
   "name": "typography-go",
   "author": "hqweay",
   "url": "https://github.com/hqweay/typography-go",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "minAppVersion": "2.9.0",
   "backends": ["windows", "linux", "darwin"],
   "frontends": ["desktop"],
@@ -16,7 +16,7 @@
   },
   "readme": {
     "default": "README.md",
-    "zh_CN": "README_zh_CN.md"
+    "zh_CN": "README.md"
   },
   "funding": {
     "openCollective": "",
