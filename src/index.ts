@@ -90,6 +90,14 @@ export default class PluginSample extends Plugin {
               if (/\^[（(].*[）)]\^/.test(result.kramdown)) {
                 continue;
               }
+              //行内 元素背景色之类的 更新有bug，不管它
+              let matches = /(\{:.*?\})/.exec(result.kramdown);
+              if (matches) {
+                if (matches[1].search("style") > 0) {
+                  continue;
+                }
+              }
+
               let formatResult = formatUtil.formatContent(result.kramdown);
               let updateResult = await fetchSyncPost("/api/block/updateBlock", {
                 dataType: "markdown",
@@ -110,10 +118,10 @@ export default class PluginSample extends Plugin {
 
   onLayoutReady() {
     this.loadData(STORAGE_NAME);
-    console.log(`frontend: ${getFrontend()}; backend: ${getBackend()}`);
+    // console.log(`frontend: ${getFrontend()}; backend: ${getBackend()}`);
   }
 
   onunload() {
-    console.log(this.i18n.byePlugin);
+    // console.log(this.i18n.byePlugin);
   }
 }

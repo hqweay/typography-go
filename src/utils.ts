@@ -339,7 +339,7 @@ class FormatUtil {
   {: updated="20240331182021" id="20240331182021-ux1ltc4"}
      */
     const filterPattern = /^(\*\s*)?(-\s*)?(>\s*)?(\s*)?\{:.*\}$/;
-    const formatPattern = /(\{:.*\})/;
+    const formatPattern = /(\{:.*?\})/;
     const jumpPatterns = [
       /^(\s*)?(\*\s*)?(-\s*)?(>\s*)?(\s*)?\{:.*\}$/,
       /\(\(.*\)\)/,
@@ -370,10 +370,6 @@ class FormatUtil {
           if (matches[1]) {
             let splits = line.split(matches[1]);
             if (splits.length == 2) {
-              console.log("000000000");
-              console.log(splits);
-              console.log("000000000");
-
               //略过((这是))、[[还会]]
               for (let index = 0; index < jumpPatterns.length; index++) {
                 if (jumpPatterns[index].test(splits[1])) {
