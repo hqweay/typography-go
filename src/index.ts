@@ -59,11 +59,11 @@ export default class PluginSample extends Plugin {
                 }
                 continue;
               }
-              //为备注时，即便内容没有变动重新更新也会导致样式出问题
+              //为备注时，即便内容没有变动重新更新也会导致样式出问题，因此跳过
               if (/\^[（(].*[）)]\^/.test(result.kramdown)) {
                 continue;
               }
-              //行内块包含背景色等情况，即便内容没有变动重新更新也会导致样式出问题
+              //行内块包含背景色等情况，即便内容没有变动重新更新也会导致样式出问题，因此跳过
               let matches = /(\{:.*?\})/.exec(result.kramdown);
               if (matches) {
                 if (matches[1].search("style") > 0) {
