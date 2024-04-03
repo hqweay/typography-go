@@ -2,7 +2,7 @@
   "name": "typography-go",
   "author": "养恐龙",
   "url": "https://github.com/hqweay/typography-go",
-  "version": "0.0.9",
+  "version": "v0.0.9",
   "minAppVersion": "3.0.0",
   "backends": ["windows", "linux", "darwin"],
   "frontends": ["desktop", "desktop-window"],
