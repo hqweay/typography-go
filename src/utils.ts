@@ -5,7 +5,7 @@ interface IgnoreBlock {
   end: number;
 }
 
-import { engList } from "./engList";
+import { standardNames } from "./standardName";
 
 class FormatUtil {
   //获取当前文档id
@@ -302,7 +302,7 @@ class FormatUtil {
 
     // content = content.replace(/\*\*(.*?)\s*\*\*/g, "**$1**");
 
-    engList.forEach((ele: any) => {
+    standardNames.forEach((ele: any) => {
       content = content.replace(ele.key, ele.value);
     });
     return content;
