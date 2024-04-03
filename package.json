@@ -10,8 +10,7 @@
   "scripts": {
     "make-link": "node  --no-warnings ./scripts/make_dev_link.js",
     "dev": "vite build --watch",
-    "build": "vite build",
-    "install": "vite build && node --no-warnings ./scripts/make_install.js"
+    "build": "vite build"
   },
   "devDependencies": {
     "@types/node": "^20.3.0",
