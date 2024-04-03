@@ -16,6 +16,9 @@ class FormatUtil {
       )
       ?.getAttribute("data-node-id");
   }
+  getCurrentDocument() {
+    return document.querySelector("[data-doc-type=NodeDocument]");
+  }
 
   condenseContent(content: any) {
     // 将 制表符 改成 四个空格
