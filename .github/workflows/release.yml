@@ -46,7 +46,7 @@ jobs:
 
       # Install dependencies
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm build
 
       # Build for production, 这一步会生成一个 package.zip
       - name: Build for production
@@ -59,4 +59,4 @@ jobs:
           artifactErrorsFailBuild: true
           artifacts: "package.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
-          prerelease: true
+          prerelease: false
