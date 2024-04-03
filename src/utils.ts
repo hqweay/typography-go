@@ -5,7 +5,7 @@ interface IgnoreBlock {
   end: number;
 }
 
-import { engList } from "./engList.ts";
+import { engList } from "./engList";
 
 class FormatUtil {
   //获取当前文档id

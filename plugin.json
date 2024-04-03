@@ -1,29 +1,41 @@
 {
   "name": "typography-go",
-  "author": "hqweay",
+  "author": "养恐龙",
   "url": "https://github.com/hqweay/typography-go",
   "version": "0.0.7",
-  "minAppVersion": "2.9.0",
-  "backends": ["windows", "linux", "darwin"],
-  "frontends": ["desktop"],
+  "minAppVersion": "3.0.0",
+  "backends": [
+    "windows",
+    "linux",
+    "darwin",
+    "ios",
+    "android"
+  ],
+  "frontends": [
+    "desktop",
+    "mobile",
+    "browser-desktop",
+    "browser-mobile",
+    "desktop-window"
+  ],
   "displayName": {
-    "default": "中文排版优化",
+    "en_US": "中文排版优化",
     "zh_CN": "中文排版优化"
   },
   "description": {
-    "default": "中文排版优化",
+    "en_US": "中文排版优化",
     "zh_CN": "中文排版优化"
   },
   "readme": {
-    "default": "README.md",
+    "en_US": "README.md",
     "zh_CN": "README.md"
   },
   "funding": {
-    "openCollective": "",
-    "patreon": "",
-    "github": "",
     "custom": [
-      "https://leay.net"
+      "https://afdian.net/a/frostime"
     ]
-  }
+  },
+  "keywords": [
+    "plugin", "type", "中文"
+  ]
 }
