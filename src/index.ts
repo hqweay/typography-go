@@ -33,21 +33,19 @@ export default class PluginSample extends Plugin {
                 editElement.textContent
               );
 
-              if (editElement.textContent) {
-                doOperations.push({
-                  id: item.dataset.nodeId,
-                  data: item.outerHTML,
-                  action: "update",
-                });
-                // 若为空的话，删除该元素
-              } else {
-                editElement.remove();
-                doOperations.push({
-                  id: item.dataset.nodeId,
-                  action: "delete",
-                });
+              //todo 清理空行有 bug
+              if (!editElement.textContent.trim()) {
+                // editElement.remove();
+              }
+              if (!item.textContent.trim()) {
+                // item.remove();
               }
             }
+          });
+          doOperations.push({
+            id: item.dataset.nodeId,
+            data: item.outerHTML,
+            action: "update",
           });
         });
         detail.protyle.getInstance().transaction(doOperations);
