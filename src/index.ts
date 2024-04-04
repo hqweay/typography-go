@@ -27,19 +27,40 @@ export default class PluginSample extends Plugin {
           );
 
           editElements.forEach((editElement: HTMLElement) => {
-            if (editElement) {
-              // console.log(editElement);
-              editElement.textContent = formatUtil.formatContent(
-                editElement.textContent
-              );
+            if (!editElement) {
+              return;
+            }
 
-              //todo 清理空行有 bug
-              if (!editElement.textContent.trim()) {
-                // editElement.remove();
+            // 检查是否有元素子节点
+            // const hasElementChildren = Array.from(editElement.childNodes).some(
+            //   (node) => node.nodeType === Node.ELEMENT_NODE
+            // );
+
+            // 不处理复杂文本
+            // if (hasElementChildren) {
+            //   return;
+            // }
+
+            //只更新纯文本内容，不更新代码块之类的行内元素
+            //思源笔记编辑文本时会将文本当作多个文本块插入，因此这里的 childNotes 会有多个
+            // 你"好"吗？——像这样的文本可能会因为引号被当做单独的文本，因此格式化失败
+            editElement.childNodes.forEach((node) => {
+              if (node.nodeType === Node.TEXT_NODE) {
+                let formatContent = formatUtil.formatContent(node.textContent);
+                //若内容未变更，不更新
+                if (formatContent == node.textContent) {
+                  return;
+                }
+                node.textContent = formatContent;
               }
-              if (!item.textContent.trim()) {
-                // item.remove();
-              }
+            });
+
+            //todo 清理空行有 bug
+            if (!editElement.innerText.trim()) {
+              // editElement.remove();
+            }
+            if (!item.innerText.trim()) {
+              // item.remove();
             }
           });
           doOperations.push({
