@@ -94,35 +94,38 @@ class FormatUtil {
     // content = content.replace(/\s*[^!=，。、`]\[\[\s*([^\]]+)\s*\]\]\s*/g, ' [[$1]] ');
     // content = content.replace(/\s*([^!=`-])\s*\[\[\s*([^\]]+)\s*\]\]\s*/g, '$1 [[$2]] ');
     // content = content.replace(/([，。、《》？『』「」；：【】｛｝—！＠￥％…（）])\[\[\s*(.*)\s*\]\]\s*/g, '$1[[$2]] ');
-    content = content.replace(/\s*\[\[\s*([^\]]+)\s*\]\]\s*/g, " [[$1]] ");
-    content = content.replace(/\=\=\s\[\[([^\]]+)\]\]\s\=\=/g, "==[[$1]]==");
-    content = content.replace(/\!\s\[\[([^\]]+)\]\]/g, "![[$1]]");
+    // content = content.replace(/\s*\[\[\s*([^\]]+)\s*\]\]\s*/g, " [[$1]] ");
+    // content = content.replace(/\=\=\s\[\[([^\]]+)\]\]\s\=\=/g, "==[[$1]]==");
+    // content = content.replace(/\!\s\[\[([^\]]+)\]\]/g, "![[$1]]");
 
     // 删除链接和中文标点的空格 add
-    content = content.replace(
-      /([\]\)])\s*([，。、《》？『』「」；：【】｛｝—！＠￥％…（）])/g,
-      "$1$2"
-    );
-    content = content.replace(
-      /([，。、《》？『』「」；：【】｛｝—！＠￥％…（）])\s*([\[\()])/g,
-      "$1$2"
-    );
+    // content = content.replace(
+    //   /([\]\)])\s*([，。、《》？『』「」；：【】｛｝—！＠￥％…（）])/g,
+    //   "$1$2"
+    // );
+    // content = content.replace(
+    //   /([，。、《》？『』「」；：【】｛｝—！＠￥％…（）])\s*([\[\()])/g,
+    //   "$1$2"
+    // );
     // 删除行首非列表的空格 add
     content = content.replace(/^\s*([\[\(])/g, "$1");
 
     // 将图片链接的格式中的多余空格“! []()”去掉，变成“![]()”
-    content = content.replace(
-      /!\s*\[\s*([^\]]+)\s*\]\s*[（(]\s*([^\s\)]*)\s*[)）]\s*/g,
-      "![$1]($2) "
-    );
+    // content = content.replace(
+    //   /!\s*\[\s*([^\]]+)\s*\]\s*[（(]\s*([^\s\)]*)\s*[)）]\s*/g,
+    //   "![$1]($2) "
+    // );
     // 将图片链接的。改为.
-    content = content.replace(/!\[\[(.*)。(.*)\]\]/g, "![[$1.$2]]");
+    // content = content.replace(/!\[\[(.*)。(.*)\]\]/g, "![[$1.$2]]");
     // 将网络地址中“ : // ”符号改成“://”
-    content = content.replace(/\s*:\s*\/\s*\/\s*/g, "://");
-    // 去掉行末空格
-    content = content.replace(/(\S*)\s*$/g, "$1");
+    // content = content.replace(/\s*:\s*\/\s*\/\s*/g, "://");
 
-    content = content.replace(/(^-$)/g, "$1 "); // - outliner 加空格
+    content = content.replace(/\s*([!,.;?])\s*/g, "$1 ");
+    content = content.replace(/\s*([!,.;?])\s*([”’])/g, "$1$2");
+    // 去掉行末空格——这个规则会影响 行内元素：I am <span>fine</span>. --> I am<span>fine</span>.
+    // content = content.replace(/(\S*)\s*$/g, "$1");
+
+    // content = content.replace(/(^-$)/g, "$1 "); // - outliner 加空格
 
     // 去掉「123 °」和 「15 %」中的空格
     content = content.replace(/([0-9])\s*([°%])/g, "$1$2");
@@ -138,16 +141,17 @@ class FormatUtil {
       /\s*([，。、《》？『』「」；∶【】｛｝！＠￥％…（）])\s*/g,
       "$1"
     ); // not & like: Tom & Jerry
+
     // - ！ 哈安  --- 保留这样的空格
-    content = content.replace(
-      /-([，。、《》？『』「」；∶【】&｛｝！＠￥％…（）])\s*/g,
-      "- $1"
-    );
-    content = content.replace(
-      /##([，。、《》？『』「」；∶【】&｛｝！＠￥％…（）])\s*/g,
-      "## $1"
-    ); // ##【哈哈】：这样的标题得保留空格
-    content = content.replace(/-\s*([？&！＠￥％])\s*/g, "- $1 "); // - ！ 提醒事项：这样的行内备注 保留空格
+    // content = content.replace(
+    //   /-([，。、《》？『』「」；∶【】&｛｝！＠￥％…（）])\s*/g,
+    //   "- $1"
+    // );
+    // content = content.replace(
+    //   /##([，。、《》？『』「」；∶【】&｛｝！＠￥％…（）])\s*/g,
+    //   "## $1"
+    // ); // ##【哈哈】：这样的标题得保留空格
+    // content = content.replace(/-\s*([？&！＠￥％])\s*/g, "- $1 "); // - ！ 提醒事项：这样的行内备注 保留空格
 
     // 全角標點與其他字符之間不加空格
     // 将无序列表的-后面的空格保留
@@ -393,7 +397,7 @@ class FormatUtil {
         // 将无编号列表的“- ”改成 “- ”
         // line = line.replace(/^(\s*)[-\*]\s+(\S)/, "$1- $2");
         // 删除多余的空格
-        // line = this.deleteSpaces(line);
+        line = this.deleteSpaces(line);
         // 插入必要的空格
         // line = this.insertSpace(line);
         // 将有编号列表的“1.  ”改成 “1. ”
