@@ -110,18 +110,23 @@ class FormatUtil {
     // 删除行首非列表的空格 add
     content = content.replace(/^\s*([\[\(])/g, "$1");
 
-    // 将图片链接的格式中的多余空格“! []()”去掉，变成“![]()”
-    // content = content.replace(
-    //   /!\s*\[\s*([^\]]+)\s*\]\s*[（(]\s*([^\s\)]*)\s*[)）]\s*/g,
-    //   "![$1]($2) "
-    // );
+    //fix bug 20240414 将图片链接的格式中的多余空格“! []()”去掉，变成“![]()”
+    content = content.replace(
+      /!\s*\[\s*([^\]]+)\s*\]\s*[（(]\s*([^\s\)]*)\s*[)）]\s*/g,
+      "![$1]($2) "
+    );
     // 将图片链接的。改为.
     // content = content.replace(/!\[\[(.*)。(.*)\]\]/g, "![[$1.$2]]");
     // 将网络地址中“ : // ”符号改成“://”
     // content = content.replace(/\s*:\s*\/\s*\/\s*/g, "://");
 
-    content = content.replace(/\s*([!,.;?])\s*/g, "$1 ");
+    //去掉多余空格
+    //fix bug 20240414
+    content = content.replace(/\s+([!,.;?])/g, "$1");
+    content = content.replace(/([!,.;?])\s+/g, "$1 ");
+
     content = content.replace(/\s*([!,.;?])\s*([”’])/g, "$1$2");
+
     // 去掉行末空格——这个规则会影响 行内元素：I am <span>fine</span>. --> I am<span>fine</span>.
     // content = content.replace(/(\S*)\s*$/g, "$1");
 
@@ -269,7 +274,9 @@ class FormatUtil {
     content = content.replace(/「(.*?)"/g, "「$1」");
     content = content.replace(/「(.*?)”/g, "「$1」");
     content = content.replace(/"(.*?)」/g, "「$1」");
-    content = content.replace(/“(\w.*?\w?)」/g, "“$1”");
+    //20240414 fix bug：将 “fact” 「哈哈」 也匹配了
+    // content = content.replace(/“(\w.*?\w?)」/g, "“$1”");
+    content = content.replace(/“(\w.*?\w)」/g, "“$1”");
     content = content.replace(/'(\w.*?\w)”/g, "“$1”");
     // 过滤一下 <div id = ""
 
